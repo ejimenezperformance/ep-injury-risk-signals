@@ -68,13 +68,14 @@ Several early-season cases (Steele, Horton, Kittredge, Cortes, Snell, Bradford) 
 | Injury cohort dates cross-checked against MLB.com Transactions text | PASS — 9/11 `exact`, 2/11 `approx` (Eovaldi and Whitlock upgraded to `exact` after verifying against MLB.com/Rangers PR/Boston Globe; only López and Mahle remain `approx`) |
 | `sufficient_data` threshold realism check | **FIXED** — an earlier draft used `MIN_DAYS_ACTIVE_REQUIRED=21` in a 42-day window, which no pitcher (starter or reliever) can mathematically reach; recalibrated to 5 |
 | Control cohort date-matching | **FIXED** — controls now paired to specific injury-case reference dates instead of all pointing at one calendar date |
+| Control cohort diversity | **IMPROVED** — expanded from 2 reused pitchers (Skenes, Wheeler) to 5 distinct pitchers, adding Cristopher Sánchez, Drew Rasmussen, and Chase Burns (each independently verified as injury-free in 2026 press coverage) for the 6 2026 injury cases |
 | Leftover ML/SHAP references from an earlier design iteration | PASS — none found; `analysis.py` and README explicitly document the decision not to use a classifier |
 | Statistical method appropriateness for small n | PASS — Mann-Whitney U + Cohen's d, no forced ML classifier |
 
 ## Limitations
 
 - Small n, explicitly reported — not powered for strong statistical claims
-- Control cohort is illustrative (n=2) and must be expanded with a proper randomized sample before real conclusions
+- Control cohort covers the 6 2026 injury cases with 5 distinct, individually-verified-healthy pitchers (Sánchez, Rasmussen, Burns, Wheeler, Skenes). The 5 **2025** injury cases (Cortes, Snell, Bradford, López, Mahle) do **not** yet have a verified-healthy 2025 control match — do not draw conclusions about those 5 cases until that gap is filled
 - No confounder control yet (workload, role, age, prior injury history)
 - Injury-type heterogeneity (flexor strain vs. UCL tear vs. inflammation) may have different signal signatures — pooling them is a simplification
 - Retrospective only — no prospective validation yet

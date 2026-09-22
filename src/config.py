@@ -90,17 +90,25 @@ INJURY_COHORT = [
 # ---------------------------------------------------------------------------
 # Cohorte de control (pitchers "sanos" de referencia)
 # Fechas de referencia repartidas para emparejar el momento de temporada de
-# cada caso de lesion (evita el sesgo de comparar todo contra un solo punto
-# del calendario, donde fatiga de fin de temporada afectaria por igual a
-# lesionados y sanos). Sigue siendo un cohorte de arranque pequeno — antes
-# de sacar conclusiones firmes, expandir con una muestra aleatoria mas
-# grande de pitchers con temporada completa sin IL.
+# cada caso de lesion. Los 6 casos de 2026 estan emparejados con pitchers
+# verificados como sanos/durables esa temporada (Cristopher Sanchez: All-Star
+# 2026, racha de 50+2/3 entradas sin carrera; Drew Rasmussen: 160.1 IP,
+# descrito en prensa como "finalmente sano"; Chase Burns: 151.1 IP en su
+# primera temporada completa — ninguno con mencion de IL en las fuentes
+# consultadas). Se uso mas de un pitcher distinto por caso para reducir el
+# sesgo de reusar siempre los mismos 2 nombres.
+#
+# PENDIENTE: los 5 casos de lesion de 2025 (Cortes, Snell, Bradford, Lopez,
+# Mahle) NO tienen todavia un control emparejado y verificado como sano en
+# 2025 especificamente — evitar asumir que Skenes/Wheeler estuvieron sanos
+# ese año sin confirmarlo. Investigar antes de sacar conclusiones sobre esos
+# 5 casos.
 # ---------------------------------------------------------------------------
 CONTROL_COHORT = [
-    {"last": "Skenes", "first": "Paul", "team": "PIT", "reference_date": "2026-07-31"},   # empareja con Hollowell
-    {"last": "Wheeler", "first": "Zack", "team": "PHI", "reference_date": "2026-03-25"},   # empareja con Steele
-    {"last": "Skenes", "first": "Paul", "team": "PIT", "reference_date": "2026-04-05"},    # empareja con Horton
-    {"last": "Wheeler", "first": "Zack", "team": "PHI", "reference_date": "2026-03-22"},   # empareja con Kittredge
-    {"last": "Skenes", "first": "Paul", "team": "PIT", "reference_date": "2026-08-09"},    # empareja con Eovaldi
-    {"last": "Wheeler", "first": "Zack", "team": "PHI", "reference_date": "2026-08-13"},   # empareja con Whitlock
+    {"last": "Sanchez", "first": "Cristopher", "team": "PHI", "reference_date": "2026-07-31"},  # empareja con Hollowell
+    {"last": "Rasmussen", "first": "Drew", "team": "TB", "reference_date": "2026-03-25"},        # empareja con Steele
+    {"last": "Burns", "first": "Chase", "team": "CIN", "reference_date": "2026-04-05"},          # empareja con Horton
+    {"last": "Wheeler", "first": "Zack", "team": "PHI", "reference_date": "2026-03-22"},          # empareja con Kittredge
+    {"last": "Skenes", "first": "Paul", "team": "PIT", "reference_date": "2026-08-09"},           # empareja con Eovaldi
+    {"last": "Sanchez", "first": "Cristopher", "team": "PHI", "reference_date": "2026-08-13"},   # empareja con Whitlock
 ]
