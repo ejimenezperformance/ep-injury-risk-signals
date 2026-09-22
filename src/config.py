@@ -77,10 +77,14 @@ INJURY_COHORT = [
      "injury_type": "shoulder (teres major strain)", "source": "Sports Injury Central press report", "date_confidence": "approx"},
     {"last": "Mahle", "first": "Tyler", "team": "TEX", "il_date": "2025-06-10",
      "injury_type": "shoulder (rotator cuff strain)", "source": "Sports Injury Central press report", "date_confidence": "approx"},
-    {"last": "Eovaldi", "first": "Nathan", "team": "TEX", "il_date": "2026-08-17",
-     "injury_type": "elbow inflammation", "source": "FOX Sports MLB buzz report", "date_confidence": "approx"},
-    {"last": "Whitlock", "first": "Garrett", "team": "BOS", "il_date": "2026-08-20",
-     "injury_type": "elbow inflammation", "source": "FOX Sports MLB buzz report", "date_confidence": "approx"},
+    {"last": "Eovaldi", "first": "Nathan", "team": "TEX", "il_date": "2026-08-09",
+     "injury_type": "right posterior elbow inflammation", "source": "MLB.com / Rangers PR / Washington Post, Aug 10 2026", "date_confidence": "exact"},
+     # Nota: la cobertura de prensa reporto explicitamente una caida de
+     # velocidad en su ultima salida antes del IL (cutter -1.5 mph, four-seam
+     # -1.6 mph vs. promedio de temporada) — exactamente la senal que este
+     # pipeline esta probando. Buen caso de validacion narrativa.
+    {"last": "Whitlock", "first": "Garrett", "team": "BOS", "il_date": "2026-08-13",
+     "injury_type": "right elbow inflammation", "source": "MLB.com / Boston Globe, Aug 13-14 2026", "date_confidence": "exact"},
 ]
 
 # ---------------------------------------------------------------------------
@@ -97,6 +101,6 @@ CONTROL_COHORT = [
     {"last": "Wheeler", "first": "Zack", "team": "PHI", "reference_date": "2026-03-25"},   # empareja con Steele
     {"last": "Skenes", "first": "Paul", "team": "PIT", "reference_date": "2026-04-05"},    # empareja con Horton
     {"last": "Wheeler", "first": "Zack", "team": "PHI", "reference_date": "2026-03-22"},   # empareja con Kittredge
-    {"last": "Skenes", "first": "Paul", "team": "PIT", "reference_date": "2026-08-17"},    # empareja con Eovaldi
-    {"last": "Wheeler", "first": "Zack", "team": "PHI", "reference_date": "2026-08-20"},   # empareja con Whitlock
+    {"last": "Skenes", "first": "Paul", "team": "PIT", "reference_date": "2026-08-09"},    # empareja con Eovaldi
+    {"last": "Wheeler", "first": "Zack", "team": "PHI", "reference_date": "2026-08-13"},   # empareja con Whitlock
 ]

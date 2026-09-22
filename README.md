@@ -56,8 +56,8 @@ The injury cohort has a small n (a handful of publicly verifiable cases). Traini
 | Cody Bradford | TEX | 2025-03-24 | Elbow sprain | exact |
 | Pablo López | MIN | 2025-06-05 | Shoulder (teres major strain) | approx |
 | Tyler Mahle | TEX | 2025-06-10 | Shoulder (rotator cuff strain) | approx |
-| Nathan Eovaldi | TEX | 2026-08-17 | Elbow inflammation | approx |
-| Garrett Whitlock | BOS | 2026-08-20 | Elbow inflammation | approx |
+| Nathan Eovaldi | TEX | 2026-08-09 | Right posterior elbow inflammation | exact |
+| Garrett Whitlock | BOS | 2026-08-13 | Right elbow inflammation | exact |
 
 Several early-season cases (Steele, Horton, Kittredge, Cortes, Snell, Bradford) have limited in-season pre-injury history and will likely be flagged `sufficient_data = False` — this is expected and handled by the pipeline, not a bug.
 
@@ -65,7 +65,7 @@ Several early-season cases (Steele, Horton, Kittredge, Cortes, Snell, Bradford) 
 
 | Check | Result |
 |---|---|
-| Injury cohort dates cross-checked against MLB.com Transactions text | PASS — 7/11 `exact`, 4/11 `approx` (press-report inferred, labeled as such) |
+| Injury cohort dates cross-checked against MLB.com Transactions text | PASS — 9/11 `exact`, 2/11 `approx` (Eovaldi and Whitlock upgraded to `exact` after verifying against MLB.com/Rangers PR/Boston Globe; only López and Mahle remain `approx`) |
 | `sufficient_data` threshold realism check | **FIXED** — an earlier draft used `MIN_DAYS_ACTIVE_REQUIRED=21` in a 42-day window, which no pitcher (starter or reliever) can mathematically reach; recalibrated to 5 |
 | Control cohort date-matching | **FIXED** — controls now paired to specific injury-case reference dates instead of all pointing at one calendar date |
 | Leftover ML/SHAP references from an earlier design iteration | PASS — none found; `analysis.py` and README explicitly document the decision not to use a classifier |
