@@ -43,8 +43,14 @@ EP_PALETTE = [EP_NAVY, EP_GOLD, "#5B7A9D", "#B5482A", "#3D6B4F"]
 # Ventana de analisis pre-evento
 # ---------------------------------------------------------------------------
 PRE_EVENT_WINDOW_DAYS = 42       # 6 semanas antes de la fecha de IL
-MIN_PITCHES_REQUIRED = 150       # umbral minimo para no descartar el caso
-MIN_DAYS_ACTIVE_REQUIRED = 21    # minimo de dias de temporada activa antes del evento
+MIN_PITCHES_REQUIRED = 100       # umbral minimo para no descartar el caso
+MIN_DAYS_ACTIVE_REQUIRED = 5     # minimo de salidas/apariciones distintas antes del evento
+# Nota de calibracion: en una ventana de 42 dias, un abridor tipico (~cada 5
+# dias) alcanza como maximo ~8 salidas, y un relevista de alto uso ~16-17.
+# Un umbral de 21 (usado en una version anterior de este archivo) era
+# matematicamente inalcanzable para CUALQUIER pitcher y habria marcado el
+# 100% de los casos como sufficient_data=False. 5 salidas distintas es un
+# minimo razonable para calcular una pendiente con algo de estabilidad.
 
 # ---------------------------------------------------------------------------
 # Cohorte de lesion (elbow/shoulder), curado desde fuentes publicas
@@ -78,11 +84,19 @@ INJURY_COHORT = [
 ]
 
 # ---------------------------------------------------------------------------
-# Cohorte de control (pitchers "sanos" de referencia — ejemplo de arranque)
-# En produccion, Emerson debe expandir esto con una muestra aleatoria de
-# pitchers con temporada completa sin IL, del mismo periodo.
+# Cohorte de control (pitchers "sanos" de referencia)
+# Fechas de referencia repartidas para emparejar el momento de temporada de
+# cada caso de lesion (evita el sesgo de comparar todo contra un solo punto
+# del calendario, donde fatiga de fin de temporada afectaria por igual a
+# lesionados y sanos). Sigue siendo un cohorte de arranque pequeno — antes
+# de sacar conclusiones firmes, expandir con una muestra aleatoria mas
+# grande de pitchers con temporada completa sin IL.
 # ---------------------------------------------------------------------------
 CONTROL_COHORT = [
-    {"last": "Skenes", "first": "Paul", "team": "PIT", "reference_date": "2026-07-31"},
-    {"last": "Wheeler", "first": "Zack", "team": "PHI", "reference_date": "2026-07-31"},
+    {"last": "Skenes", "first": "Paul", "team": "PIT", "reference_date": "2026-07-31"},   # empareja con Hollowell
+    {"last": "Wheeler", "first": "Zack", "team": "PHI", "reference_date": "2026-03-25"},   # empareja con Steele
+    {"last": "Skenes", "first": "Paul", "team": "PIT", "reference_date": "2026-04-05"},    # empareja con Horton
+    {"last": "Wheeler", "first": "Zack", "team": "PHI", "reference_date": "2026-03-22"},   # empareja con Kittredge
+    {"last": "Skenes", "first": "Paul", "team": "PIT", "reference_date": "2026-08-17"},    # empareja con Eovaldi
+    {"last": "Wheeler", "first": "Zack", "team": "PHI", "reference_date": "2026-08-20"},   # empareja con Whitlock
 ]

@@ -34,9 +34,9 @@ Teams invest heavily in injury prevention, but most public sabermetric work focu
 ## Methodology
 
 1. For each injury case, pull the 42-day Statcast window immediately before the IL date
-2. For each control case, pull an equivalent 42-day window around a comparable reference date
+2. For each control case, pull an equivalent 42-day window around a **date-matched reference point** (paired to a specific injury case's timing, to avoid confounding by season-stage fatigue affecting both groups equally)
 3. Compute per-case signals: velocity slope, spin-rate slope, extension slope (all via simple linear regression over the window), plus release-point (x/z) standard deviation
-4. Flag cases with insufficient pre-event data (common for early-season injuries with little in-season history) — these are excluded from the comparison, not silently included
+4. Flag cases with insufficient pre-event data (common for early-season injuries, where the window falls partly in spring training with sparse Statcast coverage) — these are excluded from the comparison, not silently included. A case needs ≥5 distinct pitching appearances and ≥100 pitches in the window to qualify (calibrated to what a starter — ~8 outings max in 42 days — or reliever can realistically produce; an earlier draft of this pipeline used a 21-day threshold that no real pitcher could ever satisfy)
 5. Compare injury vs. control groups per signal using Mann-Whitney U (non-parametric, appropriate for small/non-normal samples) and Cohen's d effect size
 
 ## Why Not a Machine Learning Classifier
@@ -60,6 +60,16 @@ The injury cohort has a small n (a handful of publicly verifiable cases). Traini
 | Garrett Whitlock | BOS | 2026-08-20 | Elbow inflammation | approx |
 
 Several early-season cases (Steele, Horton, Kittredge, Cortes, Snell, Bradford) have limited in-season pre-injury history and will likely be flagged `sufficient_data = False` — this is expected and handled by the pipeline, not a bug.
+
+## Audit Log
+
+| Check | Result |
+|---|---|
+| Injury cohort dates cross-checked against MLB.com Transactions text | PASS — 7/11 `exact`, 4/11 `approx` (press-report inferred, labeled as such) |
+| `sufficient_data` threshold realism check | **FIXED** — an earlier draft used `MIN_DAYS_ACTIVE_REQUIRED=21` in a 42-day window, which no pitcher (starter or reliever) can mathematically reach; recalibrated to 5 |
+| Control cohort date-matching | **FIXED** — controls now paired to specific injury-case reference dates instead of all pointing at one calendar date |
+| Leftover ML/SHAP references from an earlier design iteration | PASS — none found; `analysis.py` and README explicitly document the decision not to use a classifier |
+| Statistical method appropriateness for small n | PASS — Mann-Whitney U + Cohen's d, no forced ML classifier |
 
 ## Limitations
 
