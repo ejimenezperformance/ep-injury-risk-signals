@@ -61,6 +61,32 @@ The injury cohort has a small n (a handful of publicly verifiable cases). Traini
 
 Several early-season cases (Steele, Horton, Kittredge, Cortes, Snell, Bradford) have limited in-season pre-injury history and will likely be flagged `sufficient_data = False` — this is expected and handled by the pipeline, not a bug.
 
+## Results
+
+**Run on the real pipeline (`python src/data_loader.py` + notebook Step 4), not simulated data.**
+
+Of the 11 injury cases, only **5 passed the `sufficient_data` filter** — most early-season cases (Steele, Horton, Kittredge, Cortes, Snell, Bradford) were correctly excluded for having too little in-season pre-injury history, as anticipated in the cohort table above. Of the 6 control cases, only **1-2 passed** depending on the metric, for the same reason (control reference dates were matched to the same early-season windows).
+
+| Signal | n (injury / control) | Mean (injury) | Mean (control) | p-value | Cohen's d |
+|---|---|---|---|---|---|
+| Velocity slope (mph/day) | 5 / 2 | +0.003 | +0.009 | 1.000 | -0.22 |
+| Spin slope (rpm/day) | 5 / 2 | -0.69 | +4.82 | 0.095 | -2.73 |
+| Extension slope (ft/day) | 5 / 1 | +0.0007 | +0.0013 | N/A (n too small) | N/A |
+| Release-x variability | 5 / 2 | 0.209 | 0.175 | 1.000 | +0.35 |
+| Release-z variability | 5 / 2 | 0.117 | 0.110 | 1.000 | +0.27 |
+
+**Honest read:** with a control group this small (n=1-2, since most reference-date windows also fell in low-data stretches), **no signal reaches statistical significance**. Spin-rate decline is the one worth watching — the injury group's spin was declining while the control group's was rising, with a large effect size (Cohen's d = -2.73) and the lowest p-value of the set (0.095) — but a Cohen's d this large on n=2 controls is not trustworthy on its own; it needs a properly sized control group before it means anything. Velocity and release-point variability showed no meaningful separation between groups in this run.
+
+This is a **null-leaning result at current sample size**, not a negative finding about the underlying question — the cohort is simply too small yet to answer it, and the control group in particular needs to grow well beyond n=2 before this comparison has real statistical power. Consistent with the project's stated design (see "Why Not a Machine Learning Classifier" above), this is reported as-is rather than reframed to look more conclusive than it is.
+
+—
+
+**Corrido sobre el pipeline real (`python src/data_loader.py` + notebook Paso 4), no sobre datos simulados.**
+
+De los 11 casos de lesión, solo **5 pasaron el filtro de `sufficient_data`** — la mayoría de los casos de pretemporada fueron correctamente excluidos por tener poca historia pre-lesión dentro de temporada, tal como se anticipaba. Del cohorte de control, solo 1-2 casos pasaron según la métrica, por la misma razón.
+
+**Lectura honesta:** con un grupo de control tan pequeño (n=1-2), ninguna señal alcanza significancia estadística. El declive de spin rate es la señal más interesante a seguir (p=0.095, Cohen's d=-2.73), pero un tamaño de efecto tan grande con solo 2 controles no es confiable por sí solo — necesita un grupo de control mucho más grande antes de significar algo. Esto es un resultado que tiende a nulo al tamaño de muestra actual, no un hallazgo negativo sobre la pregunta de fondo — el cohorte simplemente es todavía muy chico para responderla.
+
 ## Audit Log
 
 | Check | Result |
